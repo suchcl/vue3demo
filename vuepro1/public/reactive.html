@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // vue2中响应式的实现
+        // let person = {
+        //     name: "Nicholas Zakas",
+        //     age: 18
+        // };
+
+        
+        // Vue2中的响应式怎么实现呢?
+        // 先建一个空对象,然后再通过Object.defineProperty(),通过getter、setter来拦截数据
+        // #region
+        /*let p = {};
+        Object.defineProperty(p,"name",{
+            configurable: true,
+            get(){ // 当读取name属性时调用
+                return person.name
+            },
+            set(value){ // 当给name属性赋值的时候使用
+                console.log("响应式name来了,改下代码就可以了");
+                person.name = value;
+            }
+        });
+        Object.defineProperty(p,"age",{
+            configurable: true,
+            get(){
+                return person.age;
+            },
+            set(value){
+                console.log("响应式age来了,改下代码就可以了");
+                person.age = value;
+            }
+        });*/
+        // #endregion
+
+        // 模拟vue3的响应式实现
+        // #region
+        /**const person = {
+            name: "Nicholas Zakas",
+            age: 26
+        };
+
+        let p = new Proxy(person,{
+            // 第二个参数,是一个对象
+            // 第一个参数:源对象,即被代理的对象,如案例中是person
+            // 第二个参数:操作的属性,如取name,那么propName就是name;如果取了age,那么propName就是age
+            get(target,propName){
+                console.log(`我读取了${propName}属性`);
+                // 返回当前操作的属性值
+                // 这里取属性值,使用了中括号语法,注意不能使用点语法,因为点语法需要是已经声明的、明确的变量,而这里的变量是不确认的某个具体的变量
+                return target[propName];
+            },
+            // set操作,要比get操作多一个参数,即要赋值的具体值
+            // 前2个参数和get相同
+            // set可以捕获修改和添加属性的变化
+            set(target,propName,value){
+                console.log(`有人修改了p身上的${propName}属性,该去做响应式、更新界面了!`);
+                target[propName] = value;
+            },
+
+            // 删除属性
+            // 删除属性的方法参数,和get方法相同
+            deleteProperty(target,propName){
+                console.log(`有人删除了p身上的${propName}属性,该去做响应式、更新界面了`);
+                return delete target[propName];
+            }
+        });*/
+        // #endregion
+
+
+        // 拦截对象属性的变化
+        // let obj = {
+        //     a: 1,
+        //     b: 2
+        // };
+
+        // 通过Object.defineProperty()实现
+        // Object.defineProperty(obj,"c",{
+        //     get(){
+        //         return "Object.defineProperty()";
+        //     }
+        // });
+
+        // Object.defineProperty(obj,"c",{
+        //     get(){
+        //         return "再次定义Object.defineProperty()"
+        //     }
+        // });
+        // 通过Reflect.defineProperty()实现
+        // const r1 = Reflect.defineProperty(obj,"c",{
+        //     get(){
+        //         return 3;
+        //     },
+        //     set(){}
+        // });
+        // console.log(`r1: ${r1}`); // r1: true
+        // const r2 = Reflect.defineProperty(obj,"c",{
+        //     get(){
+        //         return 4;
+        //     }
+        // });
+        // console.log(`r2: ${r2}`); // r2: false
+
+        // 通过Reflect.defineProperty()拦截对象属性的变化模拟Vue3的响应式
+        let person = {
+            name: "Nicholas Zakas",
+            age: 18
+        };
+
+        // 将响应式实现中的寻找目标的地方都更改为Reflect实现
+        let p = new Proxy(person,{
+            get(target,propName){
+                console.log(target,propName);
+                console.log(`我来读取p对象的${propName}属性了.`);
+                // return target[propName];
+                return Reflect.get(target,propName);
+            },
+            set(target,propName,value){
+                console.log(`我来修改p对象的${propName}属性了,值为${value}`);
+                // target[propName] = value;
+                Reflect.set(target,propName,value);
+            },
+            deleteProperty(target,propName){
+                console.log(`我来删除p对象的${propName}属性了`);
+                // return delete target[propName];
+                return Reflect.deleteProperty(target[propName]);
+            }
+        });
+</script>
+</body>
+</html>
