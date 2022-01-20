@@ -12,8 +12,19 @@
   </ul>
 </template>
 
-<script>
-export default {
-  name: "Header",
-};
-</script>
+<style lang="less">
+ul,
+ol,
+li {
+  list-style: none;
+}
+.nav {
+  display: flex;
+  li {
+    margin: 0 10px;
+    a {
+      color: #f20;
+    }
+  }
+}
+</style>
