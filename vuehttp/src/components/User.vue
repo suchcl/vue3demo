@@ -5,6 +5,7 @@
         <ul>
             <li v-for="itemm in userList" :key="itemm.id">{{ itemm.username }}</li>
         </ul>
+        <button @click="getProvince">获取省份</button>
     </div>
 </template>
 
@@ -19,9 +20,22 @@ export default {
     },
     methods: {
         getUser() {
-            axios.get("/getUser").then((res) => {
+            axios.get("/getUser", {
+                params: {
+                    id: 3
+                }
+            }).then((res) => {
                 const { userInfo } = res.data.data;
                 this.userList = userInfo;
+            });
+        },
+
+        getProvince() {
+            axios.post("/getCity", {
+                code: "130400"
+            }).then(function (res) {
+                console.log("post请求了");
+                console.log(res);
             });
         }
     }
