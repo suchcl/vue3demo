@@ -1,21 +1,5 @@
-# vuehttp
+### 备注
 
-> A Vue.js project
+该项目主要是为了测试客户端发送http请求到服务端，以及测试请求过程中携带参数、服务端接收请求参数方法
 
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+但是自从加了axios后，项目热启动慢
