@@ -2,6 +2,10 @@
   <div class="hello">
     <p>msg</p>
     <p class="text">测试下样式</p>
+    <ul>
+      <li>苹果</li>
+      <li>香蕉</li>
+    </ul>
   </div>
 </template>
 <script>
@@ -16,6 +20,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
 .text {
-  color: #f20;
+  color: #369;
 }
 </style>
