@@ -5,6 +5,7 @@
     <ul>
       <li>苹果</li>
       <li>香蕉</li>
+      <li>西红柿</li>
     </ul>
   </div>
 </template>
